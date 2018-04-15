@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+
+int main(int argc, char** argv) {
+
+    const static int WMax=100,NumMax=20;
+    bool DP[WMax][NumMax]={0};
+    for(int i=1;i<=NumMax;i++)DP[0][i]=1;
+    int w[NumMax]={0,5,1,7,8,12,33,6};
+    
+    int N,W;N=7;W=30;
+    for(int i=1;i<=W;i++){
+        for(int j=1;j<=N;j++){
+            bool flag=0;
+            if(j>1&&DP[i][j-1])flag=1;
+            
+            if(i>=w[j]&&DP[i-w[j]][j-1])flag=1;
+            
+            DP[i][j]=flag;
+        }    
+    }
+    for(int i=0;i<=W;i++){
+        cout<<endl;
+        for(int j=1;j<=N;j++){
+            cout<<DP[i][j];
+        }    
+    }
+    cout<<"To partition W "<<DP[W][N];
+    
+    return 0;
+}
