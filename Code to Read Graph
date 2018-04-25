@@ -1,0 +1,22 @@
+ifstream File("/Users/newgeorge/NetBeansProjects/Algo/Data");
+    {string str;getline(File,str);cout<<endl<<str;}
+    
+    int V;
+    {string str;getline(File,str);stringstream ss(str);ss>>V;}
+    
+    const static int VMax=100;
+    int Map[VMax][VMax];
+    {string str;
+    while(getline(File,str)){
+        stringstream ss(str);
+        int u,v,w;
+        ss>>u>>v>>w;
+        Map[u][v]=Map[v][u]=w;
+    }}
+    
+    for(int i=1;i<=V;i++){
+        for(int j=1;j<=V;j++){
+            if(Map[i][j])
+                cout<<endl<<" "<<i<<" "<<j<<" "<<Map[i][j];
+        }
+    }
