@@ -1,0 +1,39 @@
+#include<iostream>
+#include <cstdlib>
+#include<algorithm>
+using namespace std;
+
+struct Item{
+    int a;
+    int b;
+
+};
+
+bool compare(Item A,Item B)
+{
+    if(A.b==B.b)return A.a<B.b;
+    return A.b<B.b;
+}
+int main() {
+
+
+    
+    Item A[100]={{1,3},{2,5},{6,8},{7,11},{9,10},{4,13},{14,15},{6,13}};
+    int N=8;
+    
+    sort(A,A+N,compare);
+    int pos=A[0].b;
+    cout<<A[0].b;
+    bool flag=0;
+    for(int i=1;i<N;i++){
+        while(A[i].a<=pos&&i<N){
+            i++;
+        }
+        if(i==N)break;
+        pos=A[i].b;
+        cout<<endl<<i<<" "<<A[i].b;
+    }
+    
+    return 0;
+}
+
