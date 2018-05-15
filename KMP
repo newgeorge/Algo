@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+int KMP(string text,string pattern)
+{
+    const static int LenMax=100;
+    int Pistol[LenMax];
+    Pistol[0]=-1;
+    
+    int j=-1;
+    for(int i=1;i<pattern.length();i++){
+        int flag=1;
+        while(pattern[i]!=pattern[j+1]){
+            if(j==-1){flag=0;break;}
+            j=Pistol[j];
+        }
+        j+=flag;
+        Pistol[i]=j;
+        
+    }
+    
+    j=-1;
+    for(int i=0;i<text.length();i++){
+        int flag=1;
+        while(text[i]!=pattern[j+1]){
+            if(j==-1){flag=0;break;}
+            j=Pistol[j];
+        }
+        j+=flag;
+        if(j==pattern.length()-1){
+            cout<<endl<<"Found, at: "<<i-j<<" to "<<i;;
+            j=Pistol[j];
+        }
+    }
+    
+    
+}
+
+
+
+int main()
+{
+    //   012345678901234567890123456
+    KMP("512346712346789123499891234","123");
+    return 0;
+}
