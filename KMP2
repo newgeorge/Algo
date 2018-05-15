@@ -1,0 +1,52 @@
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+int KMP(string Master,string Disciple)
+{
+    const static int LenMax=100;
+    int Pistol[LenMax];
+    Pistol[0]=-1;
+    
+    int j=-1;
+    for(int i=1;i<Disciple.length();i++){
+        int flag=1;
+        while(Disciple[i]!=Disciple[j+1]){
+            if(j==-1)break;
+            j=Pistol[j];
+        }
+        if(j==-1)
+            Pistol[i]=-1;
+        else
+            Pistol[i]=++j;
+        
+    }
+    
+    j=-1;
+    for(int i=0;i<Master.length();i++){
+        
+        while(Master[i]!=Disciple[j+1]){
+            if(j==-1)break;
+            j=Pistol[j];
+        }
+        
+        if(Master[i]==Disciple[j+1])
+            j++;
+        if(j==Disciple.length()-1){
+            cout<<endl<<"Found, at: "<<i-j<<" to "<<i;;
+            j=Pistol[j];
+        }
+    }
+    
+    
+}
+
+
+
+int main()
+{
+    //   012345678901234567890123456
+    KMP("512346712346789123499891234","123");
+    return 0;
+}
